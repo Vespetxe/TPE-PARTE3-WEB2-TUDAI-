@@ -1,7 +1,7 @@
 <?php
 require_once './libs/route.php';
-require_once './app/controllers/item.controller.php';
-require_once './app/controllers/category.controller.php';
+require_once './controllers/item.controller.php';
+require_once './controllers/category.controller.php';
 require_once './models/item.model.php';
 
 $router = new Router();
