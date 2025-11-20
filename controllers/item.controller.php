@@ -1,0 +1,120 @@
+<?php
+require_once './models/item.model.php';
+
+
+class ItemController {
+    private $model;
+
+    public function __construct() {
+        $this->model = new ItemModel();
+
+        // no hay vista en la API REST
+    }
+
+    public function getItems($req, $res) {
+        // si el cliente envía el parámetro ?finalizada= (por ejemplo: ?disponible=true)
+        if (isset($req->query->disponible)) {
+
+            // convertimos el valor del string ("true" o "false") a un valor booleano real
+            $disponible = $req->query->disponible === 'true' ? true : false;
+
+            // pedimos al modelo solo los items filtrados por su estado (disponible o no)
+            $items = $this->model->getAllDisponibles($disponible);
+
+        // si no se envía el parámetro, devolvemos todos los items
+        } else {
+            //var_dump('entro L ELSE');
+            $items = $this->model->getItems();
+        }
+
+        // respondo items con 200 OK
+        return $res->json($items, 200);
+    }
+
+    public function getItem($req, $res) {
+        // obtengo el ID que viene como parámetro del endpoint
+        $idItem = $req->params->id;
+
+        $item = $this->model->getItem($idItem);
+        
+        if (!$item) {
+            return $res->json("La prenda con el id=$idItem no existe", 404);
+        }
+
+        return $res->json($item);
+    }
+
+    public function deleteItem($req, $res) {
+        $idItem = $req->params->id;
+        $item = $this->model->getItem($idItem);
+    
+        if (!$item) {
+            return $res->json("La prenda con el id=$idItem no existe", 404);
+        }
+
+        $this->model->remove($idItem);
+
+        return $res->json("La prenda con el id=$idItem se eliminó", 204);
+    }
+
+    public function insertItem($req, $res) {
+        // Valida que vengan todos los datos necesarios en el body
+        // Si falta alguno, devolvemos un error 400 (Bad Request)
+
+        //QUEDE POR ACA!!!!!!!!!!!!!
+        if (empty($req->body->id_categoria) || empty($req->body->nombre) || empty($req->body->material) || empty($req->body->precio) || empty($req->body->disponible)) {
+            return $res->json('Faltan datos', 400);
+        }
+
+        // guarda los datos del body en variables locales (solo para mayor claridad)
+        $id_categoria = $req->body->id_categoria;
+        $nombre = $req->body->nombre;
+        $material = $req->body->material;
+        $precio = $req->body->precio;
+        $disponible = $req->body->disponible;
+
+        // inserta la nueva tarea
+        $newItemId = $this->model->insertItem($id_categoria, $nombre, $material, $precio, $disponible);
+
+        // si el modelo devuelve false, algo falló al guardar (por ejemplo, error en la base de datos)
+        if ($newItemId == false) {
+            return $res->json('Error del servidor', 500);
+        }
+
+        // se considera una buena práctica devolver la entidad creada que contiene
+        // todos los datos que el modelo agregó automaticamente
+        $newItem = $this->model->getItem($newItemId);
+        //return $res->json($newTask, 201); 
+    }
+
+    public function updateItem($req, $res) {
+        $idItem = $req->params->id;
+        $item = $this->model->getItem($idItem);
+    
+        if (!$item) {
+            return $res->json("La prenda con el id=$idItem no existe", 404);
+        }
+
+        if (empty($req->body->id_categoria) || 
+            empty($req->body->nombre) || 
+            empty($req->body->material) || 
+            empty($req->body->precio) ||
+            !isset($req->body->disponible) 
+        ) {
+            // En una petición PUT se deben enviar todos los campos de la tarea.
+            // Si solo queremos modificar algunos, el método correcto sería PATCH.
+            return $res->json('Faltan datos', 400);
+        }
+
+        $id_categoria = $req->body->id_categoria;
+        $nombre = $req->body->nombre;
+        $material = $req->body->material;
+        $precio = $req->body->precio;
+        $disponible = $req->body->disponible;
+
+        $this->model->updateItem($idItem, $id_categoria, $nombre, $material, $precio, $disponible);
+
+        $updatedItem = $this->model->getItem($idItem);
+        return $res->json($updatedItem, 201); 
+    }
+}
