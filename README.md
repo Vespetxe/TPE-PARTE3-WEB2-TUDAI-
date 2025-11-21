@@ -50,3 +50,7 @@ Se puede obtener Ordenamiento con el endpoint /prendas
 por ej: /prendas?sort=precio&order=asc
 
         /prendas?sort=precio&order=desc
+
+Se pueden obtener las prendas filtradas con el endpoit /prendas
+
+por ej: /prendas?minPrecio=10000&maxPrecio=60000
