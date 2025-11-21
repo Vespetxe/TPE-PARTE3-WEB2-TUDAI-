@@ -22,11 +22,37 @@ class ItemModel {
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
+    public function getItemsByPrecioFlexible($min = null, $max = null, $columna = 'id', $orden = 'ASC') {
+        $sql = "SELECT * FROM prenda WHERE 1";
+        $params = [];
 
+        if ($min !== null) {
+            $sql .= " AND precio >= ?";
+            $params[] = $min;
+        }
+
+        if ($max !== null) {
+            $sql .= " AND precio <= ?";
+            $params[] = $max;
+        }
+
+        $sql .= " ORDER BY $columna $orden";
+
+        $query = $this->db->prepare($sql);
+        $query->execute($params);
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
     public function getDisponiblesOrdenados($disponible, $columna, $orden) {
         $sql = "SELECT * FROM prenda WHERE disponible = ? ORDER BY $columna $orden";
         $query = $this->db->prepare($sql);
         $query->execute([$disponible]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+    public function getItemsByPrecio($min, $max, $columna = 'id', $orden = 'ASC') {
+        $sql = "SELECT * FROM prenda WHERE precio BETWEEN ? AND ? ORDER BY $columna $orden";
+        $query = $this->db->prepare($sql);
+        $query->execute([$min, $max]);
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
     
