@@ -1,3 +1,5 @@
+IMPORT
+
 PANPOX REST API
 Este repositorio contiene una API REST simple para gestionar un proyecto de ropa intervenida.
 
@@ -23,7 +25,18 @@ Este proyecto usa una librería interna para rutear peticiones ubicada en libs/r
 Endpoints
 
 GET /categorias — listar categorias
+
 GET /categorias/:id — ver una categoria
+
 POST /categorias - agregar una categoria
+
 PUT /categorias/:id - editar una categoria
 
+
+GET /prendas - listar prendas
+
+GET /prendas/:id - ver una prenda
+
+PUT /prendas/:id - editar una prenda
+
+POST /prendas - agregar una prenda
