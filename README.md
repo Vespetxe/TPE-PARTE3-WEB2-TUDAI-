@@ -1,5 +1,8 @@
-IMPORTANTE: Tuve problemas para poder acceder a mi APIrest con Postman (supongo porque uso macOS).
+IMPORTANTE:
+1 . Tuve problemas para poder acceder a mi APIrest con Postman (supongo porque uso macOS).
 Pude hacerlo desde THUNDER CLIENT, el plug in de Visual Studio Code.
+
+2 . mi compañera dejo la materia, y ella habia puesto el repositorio para la 2da entrega. Y no pude modificarlo en el excel, asique aca les mando el link de mi repositorio para la reentrega de la parte 2 https://github.com/Vespetxe/TPE-PARTE2-WEB2-TUDAI . Tambien lo publique en el moodle en el foro de consultas administrativas. 
 
 PANPOX REST API
 Este repositorio contiene una API REST simple para gestionar un proyecto de ropa intervenida.
