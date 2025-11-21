@@ -1,26 +1,29 @@
-Integrantes:
+PANPOX REST API
+Este repositorio contiene una API REST simple para gestionar un proyecto de ropa intervenida.
 
-Espetxe Valentina. valentina.espetxe@gmail.com
+Qué hay en este proyecto
 
-Tematica del TPE:
 
-Una tienda virtual de emprendimiento de ropa intervenida o confeccionada llamado "PANPOX"
+router.php - Entry point para los endpoints de la API.
 
-Tenemos una clase de categoría (pantalón, pollera, remera, etc)
+controllers/ - Controladores, por ejemplo category.controller.php.
 
-Y una clase de prenda individual, que tendría un atributo que indica a que clase de prenda pertenece
+models/ - Modelos, por ejemplo item.model.php.
 
-Categoria:
+libs/route/ - Librería ligera de ruteo usada por este proyecto.
 
-Id
-Nombre
-Descripción
-Responsable
+db_tienda_panpox.sql - Script SQL para crear la base de datos y tablas iniciales.
 
-Prenda:
+.htaccess: reglas apache para soportar URL semánticas
 
-Id
-Id_categoria
-Material
-Precio
-Disponible
+
+Librería de ruteo
+Este proyecto usa una librería interna para rutear peticiones ubicada en libs/route/.
+
+Endpoints
+
+GET /categorias — listar categorias
+GET /categorias/:id — ver una categoria
+POST /categorias - agregar una categoria
+PUT /categorias/:id - editar una categoria
+
