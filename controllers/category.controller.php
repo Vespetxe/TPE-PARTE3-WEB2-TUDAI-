@@ -49,7 +49,7 @@
         public function insertCategory($req, $res) {
         // Valida que vengan todos los datos necesarios en el body
         // Si falta alguno, devolvemos un error 400 (Bad Request)
-        if (empty($req->body->nombre) || empty($req->body->descripcion) || empty($req->body->responsable)) {
+        if (!isset($req->body->nombre) || !isset($req->body->descripcion) || !isset($req->body->responsable)) {
             return $res->json('Faltan datos', 400);
         }
 
@@ -80,9 +80,9 @@
             return $res->json("La categoria con el id=$id no existe", 404);
         }
 
-        if (empty($req->body->nombre) || 
-            empty($req->body->descripcion) || 
-            empty($req->body->responsable) 
+        if (!isset($req->body->nombre) || 
+            !isset($req->body->descripcion) || 
+            !isset($req->body->responsable) 
         ) {
             // En una petición PUT se deben enviar todos los campos de la tarea.
             // Si solo queremos modificar algunos, el método correcto sería PATCH.

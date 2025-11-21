@@ -1,4 +1,5 @@
-IMPORT
+IMPORTANTE: Tuve problemas para poder acceder a mi APIrest con Postman (supongo porque uso macOS).
+Pude hacerlo desde THUNDER CLIENT, el plug in de Visual Studio Code.
 
 PANPOX REST API
 Este repositorio contiene una API REST simple para gestionar un proyecto de ropa intervenida.

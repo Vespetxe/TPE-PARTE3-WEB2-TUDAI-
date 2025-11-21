@@ -62,7 +62,7 @@ class ItemController {
         // Si falta alguno, devolvemos un error 400 (Bad Request)
 
         //QUEDE POR ACA!!!!!!!!!!!!!
-        if (empty($req->body->id_categoria) || empty($req->body->nombre) || empty($req->body->material) || empty($req->body->precio) || empty($req->body->disponible)) {
+        if (!isset($req->body->id_categoria) || !isset($req->body->nombre) || !isset($req->body->material) || !isset($req->body->precio) || !isset($req->body->disponible)) {
             return $res->json('Faltan datos', 400);
         }
 
@@ -95,10 +95,10 @@ class ItemController {
             return $res->json("La prenda con el id=$idItem no existe", 404);
         }
 
-        if (empty($req->body->id_categoria) || 
-            empty($req->body->nombre) || 
-            empty($req->body->material) || 
-            empty($req->body->precio) ||
+        if (!isset($req->body->id_categoria) || 
+            !isset($req->body->nombre) || 
+            !isset($req->body->material) || 
+            !isset($req->body->precio) ||
             !isset($req->body->disponible) 
         ) {
             // En una petición PUT se deben enviar todos los campos de la tarea.

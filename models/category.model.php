@@ -31,7 +31,7 @@ class CategoryModel {
 
     function insertCategory($nombre, $descripcion, $responsable) {
 
-        $query = $this->db->prepare("INSERT INTO categoria( nombre, descripcion, responsable) VALUES(?,?,?)");
+        $query = $this->db->prepare("INSERT INTO categoria(nombre, descripcion, responsable) VALUES(?,?,?)");
         $query->execute([$nombre, $descripcion, $responsable]);
 
 
@@ -45,7 +45,7 @@ class CategoryModel {
 
     function updateCategory($id, $nombre, $descripcion, $responsable) {
         $query = $this->db->prepare(
-            'UPDATE categoria SET nombre=?, descripcion=?, responsable WHERE id=?'
+            'UPDATE categoria SET nombre=?, descripcion=?, responsable=? WHERE id=?'
         );
 
         $query->execute([$nombre, $descripcion, $responsable , $id]);
