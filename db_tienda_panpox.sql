@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-11-2025 a las 18:29:13
+-- Tiempo de generación: 21-11-2025 a las 20:28:11
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -39,8 +39,11 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `nombre`, `descripcion`, `responsable`) VALUES
-(1, 'Accesorios Editado', 'descripcion de accesorios 2', 'Maria Gonzalezjjjjj'),
-(10, 'Pollera', 'polleras descripcion', 'Sofia Verea');
+(1, 'Accesorios ', 'descripcion de accesorios', 'Maria Gonzalez'),
+(10, 'Pollera', 'descripcion polleras ', 'Sofia Verea'),
+(11, 'Pantalon', 'descripcion pantalon', 'Valentina Espetxe'),
+(12, 'Zapatillas', 'Descripcion zapatillas', 'Martin Rodriguez'),
+(13, 'Campera', 'descripcion Campera editada', 'Valen');
 
 -- --------------------------------------------------------
 
@@ -62,9 +65,13 @@ CREATE TABLE `prenda` (
 --
 
 INSERT INTO `prenda` (`id`, `id_categoria`, `nombre`, `material`, `precio`, `disponible`) VALUES
-(8, 1, 'polleraEditada', 'jean y algodon', 10000, 0),
+(8, 1, 'Pollera 2', 'jean y algodon', 10000, 0),
 (11, 1, 'Anillo', 'oro', 20, 1),
-(12, 10, 'pollera 1', 'material pollera 1', 123455, 0);
+(12, 10, 'Pollera 1', 'material pollera 1', 123455, 0),
+(13, 1, 'Collar 1', 'material collar 1 ', 211000, 1),
+(14, 11, 'Pantalon 1 ', 'Material pantalon 1 ', 200000, 1),
+(15, 11, 'Pantalon 2', 'material pantalon 1 ', 200000, 1),
+(16, 13, 'Campera 1 editada 2', 'Algodón', 5500, 1);
 
 -- --------------------------------------------------------
 
@@ -116,13 +123,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `prenda`
 --
 ALTER TABLE `prenda`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
