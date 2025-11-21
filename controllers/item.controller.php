@@ -12,22 +12,25 @@ class ItemController {
     }
 
     public function getItems($req, $res) {
-        // si el cliente envía el parámetro ?finalizada= (por ejemplo: ?disponible=true)
-        if (isset($req->query->disponible)) {
+        $sort = $_GET['sort'] ?? null;
+        $order = $_GET['order'] ?? 'asc';
+        $disponible = $_GET['disponible'] ?? null;
 
-            // convertimos el valor del string ("true" o "false") a un valor booleano real
-            $disponible = $req->query->disponible === 'true' ? true : false;
+        // columnas permitidas
+        $columnasValidas = ['id', 'nombre', 'precio', 'material', 'disponible', 'id_categoria'];
 
-            // pedimos al modelo solo los items filtrados por su estado (disponible o no)
-            $items = $this->model->getAllDisponibles($disponible);
+        if ($sort && in_array($sort, $columnasValidas)) {
+            $order = strtolower($order) === 'desc' ? 'DESC' : 'ASC';
 
-        // si no se envía el parámetro, devolvemos todos los items
+            if ($disponible !== null) {
+                $items = $this->model->getDisponiblesOrdenados($disponible, $sort, $order);
+            } else {
+                $items = $this->model->getItemsOrdenados($sort, $order);
+            }
         } else {
-            //var_dump('entro L ELSE');
             $items = $this->model->getItems();
         }
 
-        // respondo items con 200 OK
         return $res->json($items, 200);
     }
 

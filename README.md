@@ -41,3 +41,9 @@ GET /prendas/:id - ver una prenda
 PUT /prendas/:id - editar una prenda
 
 POST /prendas - agregar una prenda
+
+Se puede obtener Ordenamiento con el endpoint /prendas
+
+por ej: /prendas?sort=precio&order=asc
+
+        /prendas?sort=precio&order=desc

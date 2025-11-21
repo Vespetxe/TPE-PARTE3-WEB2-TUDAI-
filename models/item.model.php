@@ -16,6 +16,20 @@ class ItemModel {
         return $item;
     }
     
+    public function getItemsOrdenados($columna, $orden) {
+        $sql = "SELECT * FROM prenda ORDER BY $columna $orden";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getDisponiblesOrdenados($disponible, $columna, $orden) {
+        $sql = "SELECT * FROM prenda WHERE disponible = ? ORDER BY $columna $orden";
+        $query = $this->db->prepare($sql);
+        $query->execute([$disponible]);
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+    
     public function getItems() {
         // 2. ejecuto la consulta 
         $query = $this->db->prepare('SELECT * FROM prenda');
